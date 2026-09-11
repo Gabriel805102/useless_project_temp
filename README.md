@@ -23,10 +23,10 @@ The camera identifies the objects with different shades of black and compares it
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- JavaScript (ES6+),CSS3,HTML5
+- No special Framework used
+- NO extra Libraries used
+- Web Browser,Code Editor,ANtigravity,Chatgpt
 
 For Hardware:
 - [List main components]
