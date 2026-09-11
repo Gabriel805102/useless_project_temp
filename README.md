@@ -75,16 +75,15 @@ This entire loop—Capture, Snapshot, Analyze, Track, Render—happens entirely 
 
 ### Project Demo
 # Video
-[Add your demo video link here]
+https://drive.google.com/file/d/1rb9ztRHmf0UJtceueUAPoW848mTUxebJ/view?usp=drive_link
 *Explain what the video demonstrates*
 
 # Additional Demos
 [Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Akash Davis: Everything
+
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
