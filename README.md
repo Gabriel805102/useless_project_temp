@@ -49,18 +49,28 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![alt text](<Screenshot 1.png>)
+*Shows The opening page of the website*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![alt text](<Screenshot 2.png>)
+*Shows The Sroll down highlighting the objects*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![alt text](<Screenshot 3.png>)
+*The screen after switching the backgroud ie new case*
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+![alt text](workflow.png)
+*1. Capture The browser requests your webcam feed and plays it silently in a hidden video tag.
+
+2. Snapshot Up to 30 times a second, JavaScript grabs the current frame from the video and reads the color of every single pixel using an invisible HTML5 <canvas>.
+
+3. Analyze (The Brain) JavaScript runs through all those pixels using your computer's processor. It finds the pixels that are "dark enough," groups them together into distinct objects, and calculates how black they are to generate the "Blackness Index."
+
+4. Track It remembers where those dark objects were in the previous frame so it can track their movement, speed, and draw a trail behind them.
+
+5. Render Finally, it draws the video frame onto the visible screen, draws the green tactical boxes over the dark objects it found, and updates the text in the right-hand panel with the latest stats.
+
+This entire loop—Capture, Snapshot, Analyze, Track, Render—happens entirely on your local machine in a fraction of a second, over and over again, creating a real-time experience without needing a server.*
 
 
 ### Project Demo
