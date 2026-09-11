@@ -75,8 +75,9 @@ This entire loop—Capture, Snapshot, Analyze, Track, Render—happens entirely 
 
 ### Project Demo
 # Video
-https://drive.google.com/file/d/1rb9ztRHmf0UJtceueUAPoW848mTUxebJ/view?usp=drive_link
-*Explain what the video demonstrates*
+[![BlackRank Demo](https://drive.google.com/thumbnail?id=1rb9ztRHmf0UJtceueUAPoW848mTUxebJ)](https://drive.google.com/file/d/1rb9ztRHmf0UJtceueUAPoW848mTUxebJ/view?usp=drive_link)
+
+*App functioning in live*
 
 # Additional Demos
 [Add any extra demo materials/links]
