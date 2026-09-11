@@ -35,6 +35,14 @@ For Hardware:
 
 ### Implementation
 For Software:
+The software implementation of the site follows a specific pipeline to achieve real-time "Blackness Index" analysis:
+
+Stream Acquisition: The system uses navigator.mediaDevices.getUserMedia() to request camera permissions and pipes the video stream into a hidden <video> element.
+Frame Capture: Within a continuous requestAnimationFrame loop, the current frame from the video element is drawn onto an off-screen <canvas>.
+Pixel Analysis (Thresholding): The system extracts the ImageData array from the canvas. It iterates through the pixels, converting RGB values to HSV (Hue, Saturation, Value) to evaluate brightness and color intensity. Pixels that fall below a specific brightness threshold are flagged as "dark."
+Object Detection (Clustering): The system groups contiguous flagged pixels into distinct clusters using a grid-based connected-component algorithm.
+Telemetry & Tracking: Each cluster is assigned a unique ID. The system calculates its center of mass, bounding box, and a proprietary "Blackness Index" based on the average pixel intensity within the cluster. It also tracks the object's movement between frames to calculate velocity.
+UI Rendering: Finally, the system draws the main video frame to the visible canvas, overlays tactical brackets and tracking trails, and updates the DOM in the right-hand Intelligence Hub with the newly calculated telemetry data.
 # Installation
 [commands]
 
