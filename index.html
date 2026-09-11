@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLACKRANK — Real-Time Blackness Analysis & Object Tracking System</title>
+  <meta name="description" content="BlackRank is a high-precision computer-vision instrument designed to detect, track, analyze, and rank dark objects according to a project-defined Blackness Index." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
 
+  <!-- App Viewport Wrapper -->
+  <div class="app-viewport">
+
+    <!-- 1. HEADER (54px) -->
+    <header class="app-header">
+      <div class="header-branding">
+        <div class="brand-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="3" stroke="var(--text-primary)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="5" fill="var(--accent-green)"/>
+            <path d="M12 2V6M12 18V22M2 12H6M18 12H22" stroke="var(--text-secondary)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <h1 class="app-title">BLACKRANK</h1>
+          <span class="app-subtitle">REAL-TIME BLACKNESS ANALYSIS & OBJECT TRACKING SYSTEM</span>
+        </div>
+      </div>
+
+      <div class="header-telemetry">
+        <div class="telemetry-badge" id="cameraStatusBadge">
+          <span class="status-indicator-dot" id="statusDot"></span>
+          <span class="status-badge-text" id="statusBadgeText">INITIALIZING...</span>
+        </div>
+
+        <div class="header-metrics">
+          <div class="metric-item">
+            <span class="metric-label">FPS</span>
+            <span class="metric-value" id="fpsCounter">00</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="metric-label">TRACKED</span>
+            <span class="metric-value" id="headerObjectCount">0</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="metric-label">RESOLUTION</span>
+            <span class="metric-value" id="headerRes">1280x720</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. MAIN 50/50 SPLIT WORKSPACE -->
+    <div class="main-workspace-split">
+      
+      <!-- LEFT 50%: PRISTINE FULL-HEIGHT CAMERA VIEWPORT -->
+      <section class="camera-half-panel">
+        <div class="camera-viewport-card" id="cameraViewport">
+          <!-- Video element for webcam capture -->
+          <video id="webcamVideo" autoplay playsinline muted style="display: none;"></video>
+          
+          <!-- Edge-to-Edge Canvas for Clean Vision Feed & Precision Overlays -->
+          <canvas id="cameraCanvas"></canvas>
+          
+          <!-- Minimal Top HUD Bar -->
+          <div class="camera-hud-top">
+            <div class="hud-tag">
+              <span class="hud-dot"></span>
+              <span>LIVE SPECTRAL STREAM</span>
+            </div>
+            <div class="hud-mode-badge" id="feedModeBadge">SIMULATION FEED</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT 50%: SINGLE UNIFIED SCROLLABLE INTELLIGENCE & RANKING HUB -->
+      <aside class="unified-scroll-panel">
+        
+        <!-- TOP CONTROLS WITH PROMINENT FREEZE BUTTON -->
+        <div class="top-controls-card">
+          <div class="controls-top-row">
+            <button class="btn btn-freeze" id="btnFreeze">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              FREEZE FRAME
+            </button>
+            <button class="btn btn-primary" id="btnAnalyze">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              ANALYZE BLACKNESS
+            </button>
+          </div>
+          
+          <div class="controls-sub-row">
+            <button class="btn btn-secondary" id="btnToggleCamera">START CAMERA</button>
+            <button class="btn btn-outline" id="btnResetTrack">RESET TRACKING</button>
+          </div>
+
+          <div class="controls-toggles">
+            <label class="toggle-item">
+              <input type="checkbox" id="chkTrails" checked />
+              <span class="toggle-label">TRACING TRAILS</span>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" id="chkVectors" checked />
+              <span class="toggle-label">VECTORS</span>
+            </label>
+            <label class="toggle-item">
+              <input type="checkbox" id="chkLighting" checked />
+              <span class="toggle-label">LIGHTING</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- CURRENT BLACKNESS LEADER CARD -->
+        <div class="result-leader-card" id="resultLeaderCard">
+          <div class="card-header-sm">
+            <span class="card-header-icon">◈</span>
+            <span>CURRENT BLACKNESS LEADER</span>
+          </div>
+          
+          <div class="leader-main-display">
+            <div class="leader-id" id="leaderId">NO LEADER</div>
+            <div class="leader-score-container">
+              <div class="leader-score-label">BLACKNESS INDEX</div>
+              <div class="leader-score-value" id="leaderScore">00.0%</div>
+            </div>
+            <div class="leader-classification-badge" id="leaderClassification">AWAITING TARGETS</div>
+          </div>
+
+          <div class="leader-comparison-text" id="leaderComparison">
+            AWAITING DARK OBJECT DETECTION...
+          </div>
+
+          <div class="leader-disclaimer">
+            THIS INFORMATION HAS NO PRACTICAL VALUE.
+          </div>
+        </div>
+
+        <!-- SINGLE UNIFIED RANKED TARGETS MATRIX FEED -->
+        <div class="unified-feed-section">
+          <div class="card-header-sm">
+            <span>RANKED TARGETS & POSITIONS</span>
+            <span class="card-header-count" id="listObjectCount">0 OBJECTS</span>
+          </div>
+
+          <div class="object-cards-list" id="objectCardsContainer">
+            <!-- All ranked object cards with position, blackness %, and subtle inline telemetry -->
+            <div class="empty-state-notice">
+              NO QUALIFYING BLACK OBJECTS DETECTED
+            </div>
+          </div>
+        </div>
+
+        <!-- LIGHTING ENVIRONMENT DIAGNOSTICS -->
+        <div class="lighting-card" id="lightingCard">
+          <div class="card-header-sm">
+            <span>LIGHTING ENVIRONMENT</span>
+          </div>
+          <div class="lighting-grid">
+            <div class="light-metric">
+              <span class="light-label">AMBIENT BRIGHTNESS</span>
+              <span class="light-value" id="lightAmbient">0.0</span>
+            </div>
+            <div class="light-metric">
+              <span class="light-label">SCENE CONTRAST</span>
+              <span class="light-value" id="lightContrast">0.0</span>
+            </div>
+            <div class="light-metric">
+              <span class="light-label">LIGHTING STATE</span>
+              <span class="light-value highlight-green" id="lightState">NORMAL</span>
+            </div>
+            <div class="light-metric">
+              <span class="light-label">CONFIDENCE</span>
+              <span class="light-value" id="lightConfidence">92%</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <!-- 3. STATUS BAR (28px) -->
+    <footer class="app-status-bar">
+      <div class="status-item">
+        <span class="status-key">ANALYSIS:</span>
+        <span class="status-val" id="sbAnalysis">ACTIVE</span>
+      </div>
+      <div class="status-divider">│</div>
+      <div class="status-item">
+        <span class="status-key">OBJECTS:</span>
+        <span class="status-val" id="sbObjects">0</span>
+      </div>
+      <div class="status-divider">│</div>
+      <div class="status-item">
+        <span class="status-key">TRACKING:</span>
+        <span class="status-val" id="sbTracking">STABLE</span>
+      </div>
+      <div class="status-divider">│</div>
+      <div class="status-item">
+        <span class="status-key">FPS:</span>
+        <span class="status-val" id="sbFps">0</span>
+      </div>
+      <div class="status-divider">│</div>
+      <div class="status-item">
+        <span class="status-key">LIGHTING:</span>
+        <span class="status-val" id="sbLighting">NORMAL</span>
+      </div>
+      <div class="status-divider">│</div>
+      <div class="status-item">
+        <span class="status-key">CAMERA:</span>
+        <span class="status-val" id="sbCamera">1280x720</span>
+      </div>
+
+      <div class="status-disclaimer-right">
+        RESULT HAS NO PRACTICAL VALUE
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
