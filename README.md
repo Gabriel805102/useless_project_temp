@@ -6,22 +6,19 @@
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Gabriel
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Akash Davis - Sreenarayana Gurukulam College Of Engineering
 
 ### Project Description
-[2-3 lines about what your project does]
-
+The project is a website that tracks objects with black shades and tells you the position along with the amount of darkness/blackness of the object 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Am i being followed by a black monitor???
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+The camera identifies the objects with different shades of black and compares it with the lighting to rank the object with the most premium black colour and tells you the position of the object
 
 ## Technical Details
 ### Technologies/Components Used
