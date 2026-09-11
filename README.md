@@ -29,9 +29,7 @@ For Software:
 - Web Browser,Code Editor,ANtigravity,Chatgpt
 
 For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+- Host Computer / Device,Camera Sensor,Display Monitor
 
 ### Implementation
 For Software:
